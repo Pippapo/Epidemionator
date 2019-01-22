@@ -26,7 +26,7 @@ public:
     bool isConnected();
     bool isConnectedTo(CityNode anotherCity);
     void printNeighbours();
-    void addConnection(Connection con);
+    void addConnection(Connection * con);
 
 private:
     QString name;
@@ -40,7 +40,7 @@ private:
 
     QMultiMap <int, CityNode> neighbours;
     // QList <CityNode*> adjCities; dasselbe, wie oben nur mit QList
-    QList <Connection> connectionList;
+    QList <Connection*> connectionList;
 };
 
 #endif // CITYNODE_H

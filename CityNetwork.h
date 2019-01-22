@@ -15,7 +15,7 @@ public:
     CityNetwork();
     ~CityNetwork();
     void addCity(CityNode anotherCity);
-    void addConnection(Connection anotherConnection);
+    void addConnection(Connection *anotherConnection);
     void takeOff(); //travellers begin to travel, calls traveller-functions
     int getSize();
     QString getDirectory();

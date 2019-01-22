@@ -40,7 +40,7 @@ void CityNode::setNeighbour(CityNode anotherCity){
 }
 
 //necessary or not?
-void CityNode::addConnection(Connection con){
+void CityNode::addConnection(Connection *con){
     this->connectionList.append(con);
     return;
 }

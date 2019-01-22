@@ -234,7 +234,8 @@ void MainWindow::on_pushButton_addCon_clicked()
                             CityNode cityTo = this->projectNetwork->getCityByIndex(j);
 
 
-                            Connection newEdge(cityFrom, cityTo, distanceToCity);
+                            Connection *newEdge;
+                            newEdge = new Connection(cityFrom, cityTo, distanceToCity);
 
                             this->projectNetwork->addConnection(newEdge);
                             j++;
@@ -242,7 +243,8 @@ void MainWindow::on_pushButton_addCon_clicked()
                          }else j++;
                     }
             }
-        }else i++;
+        }
+        //else i++;
      i++;
      }
     this->projectNetwork->printDetails();

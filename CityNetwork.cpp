@@ -24,7 +24,7 @@ CityNetwork::~CityNetwork(){
     delete this;
 }
 
-//fuer ausprobiererei auskommentiert --> eventuell wieder einbinden oder verändern.
+//true if city name and thus city object is part of our network
 bool CityNetwork::isPartOfNetwork(QString cityName){
     bool check = false;
     int i = 0;
@@ -35,7 +35,6 @@ bool CityNetwork::isPartOfNetwork(QString cityName){
         }
         i++;
     }
-
     return check;
 }
 
@@ -56,14 +55,15 @@ void CityNetwork::addCon(CityNode c1, CityNode c2, float distance){
 }
 */
 // da 1 = 0 wird +1 addiert für usability
-void CityNetwork::addConnection(Connection anotherPath){
+void CityNetwork::addConnection(Connection *anotherPath){
+    this->printDetails();
     if (allConnections.size() > 0){
         qDebug() << allConnections.at(0).getFrom().getName() << " " << allConnections.at(0).getTo().getName();
     }
 
-    CityNode cityFrom = anotherPath.getFrom();
+    CityNode cityFrom = anotherPath->getFrom();
 
-    CityNode cityTo = anotherPath.getTo();
+    CityNode cityTo = anotherPath->getTo();
 
 
     /* ABFRAGE OB DIESE CONNECTION SCHON BESTEHT ---> TO DO
@@ -74,7 +74,7 @@ void CityNetwork::addConnection(Connection anotherPath){
         falls Update gewuenscht, dann Update
     }*/
 
-    Connection testingCon = anotherPath;
+    Connection* testingCon = anotherPath;
     cityFrom.setNeighbour(cityTo);
 
     cityFrom.addConnection(testingCon);
@@ -83,11 +83,11 @@ void CityNetwork::addConnection(Connection anotherPath){
     //allConnections.insert(i, anotherPath);
     //allConnections.append(testingCon);
 
-    allConnections << anotherPath;
+    allConnections << *anotherPath;
 
-    qDebug() << "eine Verbindung zwischen " << anotherPath.getFrom().getName() << " und " << anotherPath.getTo().getName() << " mit Entfernung = " << anotherPath.getDistance() << " wurde hinzugefuegt.\n";
+    qDebug() << "eine Verbindung zwischen " << anotherPath->getFrom().getName() << " und " << anotherPath->getTo().getName() << " mit Entfernung = " << anotherPath->getDistance() << " wurde hinzugefuegt.\n";
 
-    qDebug() << "Anzahl der Nachbarn von " << anotherPath.getFrom().getName() << cityFrom.getNumberOfN() << endl;
+    qDebug() << "Anzahl der Nachbarn von " << anotherPath->getFrom().getName() << cityFrom.getNumberOfN() << endl;
     return;
 }
 
